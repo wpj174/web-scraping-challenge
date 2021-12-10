@@ -13,13 +13,23 @@
   <div class="container-fluid">
     <div class="jumbotron text-center">
       <h1>Mission to Mars</h1>
-      <p>Add Scrape button</p>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
     </div>
     <p>TODO</p>
     <p>- Mars News</p>
+    <p>{{ mars.news_title }}</p>
+    <p>{{ mars.news_p }}</p>
     <p>- Featured Image</p>
+    <img src="{{ mars.feat_img_url }}">
     <p>- Mars Facts Table</p>
+    <div>
+      {{ mars.table|safe }}
+  </div>
     <p>- Mars Hemisphere</p>
+    {% for hem in mars.hem_imgs %}
+      <p>{{ hem.title }}</p>
+      <img src="{{ hem.img_url }}">
+    {% endfor %}
   </div>
 </body>
 

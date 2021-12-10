@@ -7,7 +7,7 @@ from pprint import pprint
 import time
 
 
-def scrape():
+def scrape_data():
     mars_data = dict()
 
     # Set up Splinter
@@ -51,7 +51,7 @@ def scrape():
     ##################
 
     # Visit URL
-    url = 'https://spaceimages-mars.com'
+    url = 'https://spaceimages-mars.com/'
     browser.visit(url)
 
     # Find and click the full image button
@@ -87,7 +87,7 @@ def scrape():
     #mf_df.to_html()
 
     # Add to the mars_data dictionary
-    mars_data['table_df'] = mf_df
+    mars_data['table'] = mf_df.to_html()
 
     ####################
     # Mars Hemispheres #
@@ -114,8 +114,8 @@ def scrape():
         html = browser.html
         hem_soup = soup(html, 'html.parser')
         
-        details = hem_soup.find_all('dd')
-        hires_link = details[1].a['href']
+        details = hem_soup.find('li')
+        hires_link = details.a['href']
         
         hem = dict()
         hem['img_url'] = url + hires_link
