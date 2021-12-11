@@ -11,25 +11,47 @@
 
 <body>
   <div class="container-fluid">
-    <div class="jumbotron text-center">
+    <div class="row jumbotron text-center">
       <h1>Mission to Mars</h1>
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
     </div>
-    <p>TODO</p>
-    <p>- Mars News</p>
-    <p>{{ mars.news_title }}</p>
-    <p>{{ mars.news_p }}</p>
-    <p>- Featured Image</p>
-    <img src="{{ mars.feat_img_url }}">
-    <p>- Mars Facts Table</p>
-    <div>
-      {{ mars.table|safe }}
-  </div>
-    <p>- Mars Hemisphere</p>
-    {% for hem in mars.hem_imgs %}
-      <p>{{ hem.title }}</p>
-      <img src="{{ hem.img_url }}">
-    {% endfor %}
+    <div class="row mars-news-wrapper">
+      <div class="col-md-12">
+        <h1 class="mars-news">Latest Mars News</h1>
+        <h4 class="news-title">{{ mars.news_title }}</h2>
+        <p class="news-p">{{ mars.news_p }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Featured Image</h2>
+        <img src="{{ mars.feat_img_url }}">
+      </div>
+      <div class="col-md-4">
+        <h3>Mars Facts</h3>
+        {{ mars.table|safe }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="mars-hem text-center">Mars Hemispheres</h1>
+        <hr class="mars-hem-hr">
+      </div>
+    </div>
+    <div class="row">
+      {% for hem in mars.hem_imgs %}
+        <div class="col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top img-responsive" src="{{ hem.img_url }}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{ hem.title }}</h5>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </body>
 
