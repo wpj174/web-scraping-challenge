@@ -84,14 +84,11 @@ def scrape_data():
     tables = pd.read_html(url)
     mf_df = tables[0]
     
-    mf_df.iloc[0,0] = ''
-
-    mf_df.columns = mf_df.iloc[0]
-    mf_df.drop(labels=[0], axis=0, inplace=True)
-
+    mf_df.columns = ['Description', 'Mars', 'Earth']
+    mf_df.set_index('Description', inplace=True)
 
     # Add to the mars_data dictionary
-    mars_data['table'] = mf_df.to_html(index=False, classes='table table-striped')
+    mars_data['table'] = mf_df.to_html(index=True, classes='table table-striped')
 
     ####################
     # Mars Hemispheres #
